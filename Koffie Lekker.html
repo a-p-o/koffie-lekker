@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Koffie Lekker</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: #f5f5f5;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 24px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-bottom: 24px;
+            color: #333;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 500;
+            color: #555;
+            font-size: 14px;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            transition: border-color 0.2s;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #6b4423;
+        }
+
+        .button-group {
+            margin: 24px 0;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            font-size: 16px;
+            font-weight: 600;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            min-height: 44px;
+        }
+
+        .btn-generate {
+            background-color: #6b4423;
+            color: white;
+            margin-bottom: 12px;
+        }
+
+        .btn-generate:hover {
+            background-color: #573619;
+        }
+
+        .btn-copy {
+            background-color: #e8e8e8;
+            color: #333;
+        }
+
+        .btn-copy:hover {
+            background-color: #d5d5d5;
+        }
+
+        .btn-copy.copied {
+            background-color: #4caf50;
+            color: white;
+        }
+
+        .output-section {
+            margin-top: 24px;
+        }
+
+        .output-label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 500;
+            color: #555;
+            font-size: 14px;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 12px;
+            font-size: 14px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            resize: vertical;
+            min-height: 120px;
+            font-family: inherit;
+            line-height: 1.5;
+            background-color: #f9f9f9;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: #6b4423;
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 12px;
+            }
+
+            .container {
+                padding: 16px;
+            }
+
+            h1 {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Koffie Lekker</h1>
+        
+        <form id="coffeeForm">
+            <div class="form-group">
+                <label for="origin">Herkomst (Origin)</label>
+                <input type="text" id="origin" placeholder="e.g., Kenya">
+            </div>
+
+            <div class="form-group">
+                <label for="region">Regio (Region)</label>
+                <input type="text" id="region" placeholder="e.g., Gakenke district">
+            </div>
+
+            <div class="form-group">
+                <label for="farm">Farm/Producer</label>
+                <input type="text" id="farm" placeholder="e.g., Thikagiki">
+            </div>
+
+            <div class="form-group">
+                <label for="lot">Lot nummer (Lot)</label>
+                <input type="text" id="lot" placeholder="e.g., Micro Lot 1">
+            </div>
+
+            <div class="form-group">
+                <label for="elevation">Hoogte (Elevation)</label>
+                <input type="text" id="elevation" placeholder="e.g., 2000-2300 meters">
+            </div>
+
+            <div class="form-group">
+                <label for="varieties">Variëteiten (Varieties)</label>
+                <input type="text" id="varieties" placeholder="e.g., SL-28, SL-34, Batian">
+            </div>
+
+            <div class="form-group">
+                <label for="processing">Bewerking (Processing)</label>
+                <input type="text" id="processing" placeholder="e.g., Washed">
+            </div>
+
+            <div class="form-group">
+                <label for="supplyChain">Supply Chain</label>
+                <input type="text" id="supplyChain" placeholder="e.g., Thikagiki → Nordic → Keen">
+            </div>
+
+            <div class="form-group">
+                <label for="roast">Roast</label>
+                <input type="text" id="roast" placeholder="e.g., Light roast">
+            </div>
+
+            <div class="form-group">
+                <label for="tastingNotes">Tasting Notes</label>
+                <input type="text" id="tastingNotes" placeholder="e.g., Blackcurrant, rhubarb, plum">
+            </div>
+
+            <div class="form-group">
+                <label for="weight">Gewicht (Weight)</label>
+                <input type="text" id="weight" placeholder="e.g., 250g">
+            </div>
+
+            <div class="button-group">
+                <button type="submit" class="btn-generate">Generate Memo</button>
+            </div>
+        </form>
+
+        <div class="output-section">
+            <label class="output-label" for="output">Generated Memo</label>
+            <textarea id="output" readonly></textarea>
+            <div class="button-group">
+                <button type="button" id="copyBtn" class="btn-copy">Copy to Clipboard</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById('coffeeForm');
+        const output = document.getElementById('output');
+        const copyBtn = document.getElementById('copyBtn');
+
+        const fieldMapping = [
+            { id: 'origin', label: 'ORIGIN' },
+            { id: 'region', label: 'REGION' },
+            { id: 'farm', label: 'FARM/PRODUCER' },
+            { id: 'lot', label: 'LOT' },
+            { id: 'elevation', label: 'ELEVATION' },
+            { id: 'varieties', label: 'VARIETIES' },
+            { id: 'processing', label: 'PROCESSING' },
+            { id: 'supplyChain', label: 'SUPPLY CHAIN' },
+            { id: 'roast', label: 'ROAST' },
+            { id: 'tastingNotes', label: 'TASTING NOTES' },
+            { id: 'weight', label: 'WEIGHT' }
+        ];
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            generateMemo();
+        });
+
+        copyBtn.addEventListener('click', function() {
+            if (output.value) {
+                navigator.clipboard.writeText(output.value).then(function() {
+                    copyBtn.textContent = 'Copied!';
+                    copyBtn.classList.add('copied');
+                    setTimeout(function() {
+                        copyBtn.textContent = 'Copy to Clipboard';
+                        copyBtn.classList.remove('copied');
+                    }, 2000);
+                }).catch(function(err) {
+                    alert('Failed to copy to clipboard');
+                });
+            }
+        });
+
+        function generateMemo() {
+            let memo = '';
+            
+            fieldMapping.forEach(function(field) {
+                const value = document.getElementById(field.id).value.trim();
+                if (value) {
+                    memo += field.label + ': ' + value + '. ';
+                }
+            });
+
+            output.value = memo.trim();
+        }
+    </script>
+</body>
+</html>
