@@ -142,6 +142,47 @@
                 font-size: 20px;
             }
         }
+
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-color: #1a1a1a;
+            }
+
+            .container {
+                background: #2d2d2d;
+            }
+
+            h1 {
+                color: #e0e0e0;
+            }
+
+            label, .output-label {
+                color: #b0b0b0;
+            }
+
+            input[type="text"], textarea {
+                background-color: #1a1a1a;
+                border-color: #444;
+                color: #e0e0e0;
+            }
+
+            input[type="text"]:focus, textarea:focus {
+                border-color: #8b6239;
+            }
+
+            textarea {
+                background-color: #1a1a1a;
+            }
+
+            .btn-copy {
+                background-color: #3a3a3a;
+                color: #e0e0e0;
+            }
+
+            .btn-copy:hover {
+                background-color: #4a4a4a;
+            }
+        }
     </style>
 </head>
 <body>
